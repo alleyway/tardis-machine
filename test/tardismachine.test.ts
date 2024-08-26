@@ -670,10 +670,17 @@ describe('tardis-machine', () => {
       1000 * 60 * 4
     )
     test(
-      'streams normalized real-time messages for bitstamp to test exchangeSpecific field',
+      'streams normalized real-time messages for testing exchangeSpecific field',
       async () => {
         const options = await Promise.all(
-          EXCHANGES.filter((e) => e == 'bitstamp').map(
+          EXCHANGES.filter((e) =>
+            // e == 'bitstamp' ||
+            // e == 'coinbase' ||
+            // e == 'bybit-spot' ||
+            // e == 'bitmex' ||
+            e == 'okex' ||
+            e == 'crypto-com' ||
+            e == 'binance' ).map(
             async (exchange) => {
               const exchangeDetails = await getExchangeDetails(exchange)
               const dataTypes: any[] = ['trade']
@@ -702,7 +709,7 @@ describe('tardis-machine', () => {
             JSON.parse(message)
             console.log(message)
             count++
-            if (count > 20) {
+            if (count > 2000) {
               resolve()
             }
           }, () => {
