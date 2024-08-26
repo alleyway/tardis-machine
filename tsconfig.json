@@ -17,6 +17,11 @@
     "noUnusedParameters": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "lib": ["es2017", "dom"]
+    "lib": ["es2017", "dom"],
+    "baseUrl": ".",
+    "paths": {
+      "tardis-dev": ["./node_modules/@alleyway/tardis-dev"],
+      "tardis-dev/*": ["./node_modules/@alleyway/tardis-dev/*"]
+    }
   }
 }

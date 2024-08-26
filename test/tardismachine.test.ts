@@ -657,10 +657,56 @@ describe('tardis-machine', () => {
         await new Promise<void>((resolve) => {
           new SimpleWebsocketClient(`ws://localhost:${PORT + 1}/ws-stream-normalized?options=${serializeOptions(options)}`, (message) => {
             JSON.parse(message)
+            console.log(message)
             count++
             if (count > 20000) {
               resolve()
             }
+          }, () => {
+            console.log("opened connection")
+          })
+        })
+      },
+      1000 * 60 * 4
+    )
+    test(
+      'streams normalized real-time messages for bitstamp to test exchangeSpecific field',
+      async () => {
+        const options = await Promise.all(
+          EXCHANGES.filter((e) => e == 'bitstamp').map(
+            async (exchange) => {
+              const exchangeDetails = await getExchangeDetails(exchange)
+              const dataTypes: any[] = ['trade']
+
+              var symbols = exchangeDetails.availableSymbols
+                .filter((s) => s.id !== undefined)
+                .filter((s) => s.availableTo === undefined || new Date(s.availableTo).valueOf() > new Date().valueOf())
+                .slice(0, 2)
+                .map((s) => s.id)
+
+              return {
+                exchange,
+                symbols,
+                withDisconnectMessages: true,
+                timeoutIntervalMS: 30 * 1000,
+                dataTypes: dataTypes
+              }
+            }
+          )
+        )
+
+        let count = 0
+
+        await new Promise<void>((resolve) => {
+          new SimpleWebsocketClient(`ws://localhost:${PORT + 1}/ws-stream-normalized?options=${serializeOptions(options)}`, (message) => {
+            JSON.parse(message)
+            console.log(message)
+            count++
+            if (count > 20) {
+              resolve()
+            }
+          }, () => {
+            console.log("opened connection")
           })
         })
       },
