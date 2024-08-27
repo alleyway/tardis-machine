@@ -674,10 +674,10 @@ describe('tardis-machine', () => {
       async () => {
         const options = await Promise.all(
           EXCHANGES.filter((e) =>
-            // e == 'bitstamp' ||
-            // e == 'coinbase' ||
-            // e == 'bybit-spot' ||
-            // e == 'bitmex' ||
+            e == 'bitstamp' ||
+            e == 'coinbase' ||
+            e == 'bybit-spot' ||
+            e == 'bitmex' ||
             e == 'okex' ||
             e == 'crypto-com' ||
             e == 'binance' ).map(

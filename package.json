@@ -1,6 +1,6 @@
 {
   "name": "@alleyway/tardis-machine",
-  "version": "3.29.10.a",
+  "version": "3.29.10.b",
   "engines": {
     "node": ">=16"
   },
@@ -56,10 +56,11 @@
   ],
   "license": "MPL-2.0",
   "dependencies": {
+    "@alleyway/tardis-dev": "^13.29.14.a",
     "debug": "^4.3.4",
     "find-my-way": "^6.3.0",
     "is-docker": "^2.2.1",
-    "@alleyway/tardis-dev": "^13.29.14.a",
+    "module-alias": "^2.2.3",
     "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.42.0",
     "yargs": "^17.5.1"
   },

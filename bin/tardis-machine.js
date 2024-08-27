@@ -1,5 +1,14 @@
 #!/usr/bin/env node
 
+// In your main entry file (e.g., app.js or index.js)
+require('module-alias/register');
+
+// Add aliases
+const moduleAlias = require('module-alias');
+
+// Alias 'my-module' to 'path/to/replacement-module'
+moduleAlias.addAlias('tardis-dev', '@alleyway/tardis-dev');
+
 const yargs = require('yargs')
 const os = require('os')
 const path = require('path')
